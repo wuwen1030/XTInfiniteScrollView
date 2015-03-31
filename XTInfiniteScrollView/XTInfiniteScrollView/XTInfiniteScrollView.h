@@ -15,7 +15,6 @@
 - (NSUInteger)numberOfImagesInInfiniteScrollView:(XTInfiniteScrollView *)infiniteScrollView;
 
 @optional
-
 - (NSURL *)infiniteScrollView:(XTInfiniteScrollView *)infiniteScrollView
            urlForImageAtIndex:(NSUInteger)index;
 

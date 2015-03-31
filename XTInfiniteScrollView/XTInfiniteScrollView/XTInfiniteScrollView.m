@@ -7,9 +7,9 @@
 //
 
 #import "XTInfiniteScrollView.h"
-#import "UIImageView+TNURLImage.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
-static const NSInteger kAutoScrollInterval = 3;
+static const NSTimeInterval kAutoScrollInterval = 3;
 
 const int privateContext = 0;
 
@@ -79,12 +79,12 @@ const int privateContext = 0;
     
     [self setCurrentDisplayWithCurrentPage:self.currentPage];
     
-    // Thanks to stupid Tuniu PM, our view will not scroll when there's only one image
     NSInteger imageCount = self.totalPage > 1 ? 3 : 1;
     
     for (int i = 0; i < imageCount; i++)
     {
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i*self.width, 0, self.width, self.height)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i*CGRectGetWidth(self.bounds), 0,
+                                                                               CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds))];
         imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         NSURL *imageUrl = nil;
@@ -100,22 +100,29 @@ const int privateContext = 0;
             placeholderImage = [self.dataSource infiniteScrollView:self placeholderForImageAtIndex:index];
         }
         
-        [imageView tn_setImageWithURL:imageUrl
-                     placeholderImage:placeholderImage];
+        if (!imageUrl)
+        {
+            imageView.image = placeholderImage;
+        }
+        else
+        {
+            [imageView setImageWithURL:imageUrl
+                      placeholderImage:placeholderImage];
+        }
         
         [self.scrollView addSubview:imageView];
     }
-    
-    _scrollView.contentSize = CGSizeMake(imageCount*self.width, self.height);
+    _scrollView.contentSize = CGSizeMake(imageCount*CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
     
     if (imageCount > 1)
     {
-        _scrollView.contentOffset = CGPointMake(self.width, 0);
+        _scrollView.contentOffset = CGPointMake(CGRectGetWidth(self.bounds), 0);
     }
 }
 
-- (void)willMoveToSuperview:(UIView *)newSuperview
+- (void)didMoveToSuperview
 {
+    [super didMoveToSuperview];
     [self reloadData];
 }
 
@@ -178,7 +185,7 @@ const int privateContext = 0;
 {
     if (self.totalPage > 1)
     {
-        [self.scrollView setContentOffset:CGPointMake(2 * self.width, 0) animated:YES];
+        [self.scrollView setContentOffset:CGPointMake(2 * CGRectGetWidth(self.bounds), 0) animated:YES];
     }
     else
     {
@@ -200,7 +207,7 @@ const int privateContext = 0;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    CGFloat floatPage = scrollView.contentOffset.x / self.width;
+    CGFloat floatPage = scrollView.contentOffset.x / CGRectGetWidth(self.bounds);
     
     if (floatPage >= 2)
     {
