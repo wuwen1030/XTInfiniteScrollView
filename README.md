@@ -1,5 +1,4 @@
 # XTInfiniteScrollView
-This is an very convenient infinite scroll view. We supply elegant APIs similar to UITableView.
 
 ![gif](http://i3.tietuku.com/9b43ff25642ff319.gif)
 ##Initialization
