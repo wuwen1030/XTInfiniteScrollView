@@ -28,7 +28,7 @@ If the showing images are from network, do implement `(UIImage *)infiniteScrollV
 
 ##Delegate
 
-You will want to know which image the users have clicked, because you will show a detail view. And maybe you also want a page control to show which image are showing.
+You should know which image the users have clicked, when you want to show a detail view. And maybe you will also need a page control to indicate which image is showing.
 ```
 #pragma mark - XTInfiniteScrollViewDelegate
 
