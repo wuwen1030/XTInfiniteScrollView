@@ -44,5 +44,7 @@ You will want to know which image the users have clicked, because you will show 
 ```
 ##PS
 Do remeber to import [AFNetworking](https://github.com/AFNetworking/AFNetworking)
+##Usage
+pod 'XTInfiniteScrollView' ~> '1.0.0'
 ##TODO
 Support autolayout.
