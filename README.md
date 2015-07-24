@@ -46,5 +46,3 @@ You should know which image the users have clicked, when you want to show a deta
 Do remeber to import [AFNetworking](https://github.com/AFNetworking/AFNetworking)
 ##Usage
 `pod 'XTInfiniteScrollView' ~> '1.0.0'`
-##TODO
-Support autolayout.
