@@ -37,6 +37,7 @@
 @interface XTInfiniteScrollView : UIView
 
 @property (nonatomic, assign) BOOL shouldAutoScroll;
+@property (nonatomic, assign) NSTimeInterval autoScrollInterval;
 @property (nonatomic, weak) id<XTInfiniteScrollViewDataSource> dataSource;
 @property (nonatomic, weak) id<XTInfiniteScrollViewDelegate> delegate;
 

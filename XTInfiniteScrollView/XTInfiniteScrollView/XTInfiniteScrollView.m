@@ -9,9 +9,7 @@
 #import "XTInfiniteScrollView.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
-static const NSTimeInterval kAutoScrollInterval = 3;
-
-const int privateContext = 0;
+static const int privateContext = 0;
 
 @interface XTInfiniteScrollView () <UIScrollViewDelegate>
 
@@ -53,6 +51,8 @@ const int privateContext = 0;
 
 - (void)commonInit
 {
+    _autoScrollInterval = 3.0;
+    
     _scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
     _scrollView.pagingEnabled = YES;
     _scrollView.showsHorizontalScrollIndicator = NO;
@@ -239,7 +239,7 @@ const int privateContext = 0;
 {
     if (self.shouldAutoScroll && !self.scrollTimer)
     {
-        self.scrollTimer = [NSTimer scheduledTimerWithTimeInterval:kAutoScrollInterval
+        self.scrollTimer = [NSTimer scheduledTimerWithTimeInterval:self.autoScrollInterval
                                                             target:self
                                                           selector:@selector(autoScroll)
                                                           userInfo:nil
@@ -268,6 +268,18 @@ const int privateContext = 0;
     {
         [self disableAutoScroll];
     }
+}
+
+- (void)setAutoScrollInterval:(NSTimeInterval)autoScrollInterval {
+    if (autoScrollInterval < 1) {
+        return;
+    }
+    if (fabs(_autoScrollInterval - autoScrollInterval) < FLT_EPSILON) {
+        return;
+    }
+    _autoScrollInterval = autoScrollInterval;
+    [self disableAutoScroll];
+    [self enableAutoScroll];
 }
 
 #pragma mark - KVO
