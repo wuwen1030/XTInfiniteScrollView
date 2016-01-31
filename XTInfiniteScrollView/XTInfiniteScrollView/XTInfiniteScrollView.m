@@ -1,9 +1,9 @@
 //
 //  XTInfiniteScrollView.m
-//  TuNiuApp
+//  X-Team
 //
 //  Created by Ben on 15/3/12.
-//  Copyright (c) 2015年 Tuniu. All rights reserved.
+//  Copyright (c) 2015年 X-Team. All rights reserved.
 //
 
 #import "XTInfiniteScrollView.h"
