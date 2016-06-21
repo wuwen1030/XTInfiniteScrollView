@@ -6,7 +6,7 @@ You can either init a inifinite scroll view with code, xib or storyboard.
 ##Data Source
 Data source is very similar to UITableViewDataSource. Implemention of protocols in `XTInfiniteScrollViewDataSource`.
 
-```
+```objc
 #pragma mark - XTInfiniteScrollViewDataSource
 
 - (NSUInteger)numberOfImagesInInfiniteScrollView:(XTInfiniteScrollView *)infiniteScrollView
@@ -24,12 +24,17 @@ Data source is very similar to UITableViewDataSource. Implemention of protocols 
     return self.placeholderImages[index];
 }
 ```
-If the showing images are from network, do implement `(UIImage *)infiniteScrollView:(XTInfiniteScrollView *)infiniteScrollView placeholderForImageAtIndex:(NSUInteger)index`.
+If the showing images are from network, do implement 
+
+```objc
+- (UIImage *)infiniteScrollView:(XTInfiniteScrollView *)infiniteScrollView placeholderForImageAtIndex:(NSUInteger)index
+```
 
 ##Delegate
 
 You should know which image the users have clicked, when you want to show a detail view. And maybe you will also need a page control to indicate which image is showing.
-```
+
+```objc
 #pragma mark - XTInfiniteScrollViewDelegate
 
 - (void)infiniteScrollView:(XTInfiniteScrollView *)infiniteScrollView didSelectImageAtIndex:(NSUInteger)index
@@ -42,7 +47,5 @@ You should know which image the users have clicked, when you want to show a deta
     NSLog(@"Did show image at index:%ld", (long)index);
 }
 ```
-##PS
-Do remeber to import [AFNetworking](https://github.com/AFNetworking/AFNetworking)
 ##Usage
-`pod 'XTInfiniteScrollView' ~> '1.0.0'`
+`pod 'XTInfiniteScrollView' ~> '1.0.1'`
