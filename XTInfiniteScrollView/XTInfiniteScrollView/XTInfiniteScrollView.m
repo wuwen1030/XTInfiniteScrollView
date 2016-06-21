@@ -120,10 +120,14 @@ static const int privateContext = 0;
     }
 }
 
-- (void)didMoveToSuperview
-{
-    [super didMoveToSuperview];
-    [self reloadData];
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    [super willMoveToSuperview:newSuperview];
+    if (newSuperview) {
+        [self reloadData];
+    } else {
+        // Break the NSTimer retain cycle
+        [self disableAutoScroll];
+    }
 }
 
 #pragma mark - Display

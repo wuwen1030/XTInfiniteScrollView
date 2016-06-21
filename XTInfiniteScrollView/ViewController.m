@@ -12,6 +12,7 @@
 @interface ViewController () <XTInfiniteScrollViewDataSource, XTInfiniteScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet XTInfiniteScrollView *infiniteScrollView;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (strong, nonatomic) NSArray *imageURLs;
 @property (strong, nonatomic) NSArray *placeholderImages;
 
@@ -33,12 +34,8 @@
     self.placeholderImages = @[[UIImage imageNamed:@"car"],
                                [UIImage imageNamed:@"car"],
                                [UIImage imageNamed:@"car"]];
+    self.pageControl.numberOfPages = self.imageURLs.count;
     [self.infiniteScrollView reloadData];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
 }
 
 #pragma mark - XTInfiniteScrollViewDataSource
@@ -68,6 +65,7 @@
 - (void)infiniteScrollView:(XTInfiniteScrollView *)infiniteScrollView didShowImageAtIndex:(NSUInteger)index
 {
     NSLog(@"Did show image at index:%ld", (long)index);
+    self.pageControl.currentPage = index;
 }
 
 @end
