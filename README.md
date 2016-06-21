@@ -1,6 +1,6 @@
 # XTInfiniteScrollView
 
-![gif](http://i3.tietuku.com/9b43ff25642ff319.gif)
+![gif](https://raw.githubusercontent.com/wuwen1030/XTInfiniteScrollView/master/demo.gif)
 ##Initialization
 You can either init a inifinite scroll view with code, xib or storyboard.
 ##Data Source
