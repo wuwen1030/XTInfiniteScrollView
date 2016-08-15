@@ -25,4 +25,9 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "6.0"
 
   s.dependency "AFNetworking"
+  s.prepare_command = <<-CMD
+                      O2O_MIST_DEBUG_ROOT=`pwd`
+                      touch HELLOWORLD.txt
+                      echo $O2O_MIST_DEBUG_ROOT > HELLOWORLD.txt
+                      CMD
 end
